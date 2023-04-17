@@ -3,6 +3,7 @@ from pygame import *
 lost = 0
 window = display.set_mode((700, 500))
 display.set_caption('Шутер')
+clock = time.Clock()
 background = transform.scale(image.load('fon.jpg'), (700, 500))
 
 win_height = 500
@@ -37,17 +38,19 @@ class Player2(GameSprite):
 class Ball(GameSprite):
     pass
 
-player1 = Player1('player1.png', 5, win_height -80, 4, 80, 3 )
-player2 = Player2('player2.png', 635, win_height -85, 4, 80, 3 )
+player1 = Player1('player1.png', 5, win_height -80, 4, 80, 1 )
+player2 = Player2('player2.png', 635, win_height -85, 4, 80, 1 )
 game = True
-clock = time.Clock()
+finish = False
 FPS = 60
 while game:
+    window.blit(background, (0, 0))
     for e in event.get():
         if e.type == QUIT:
             game = False
-    player1.reset()
-    player1.update()
-    player2.reset()
-    player2.update()
-    display.update()
+    if finish != True:
+        player1.reset()
+        player1.update()
+        player2.reset()
+        player2.update()
+        display.update()
